@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Institución</title>
+</head>
+<body>
+    <h1>Crear nueva Institución</h1>
+    <form action="/add" method="POST">
+        <label for="title">Nombre de la Institución:</label>
+        <input type="text" id="title" name="title" required>
+        <br><br>
+
+        <label for="content">Descripción de la Institución:</label>
+        <textarea id="content" name="content" required></textarea>
+        <br><br>
+
+        <label for="author">Autor:</label>
+        <input type="text" id="author" name="author">
+        <br><br>
+
+        <!-- Courses section -->
+        <div id="courses">
+            <h3>Cursos</h3>
+            <div class="course">
+                <label for="course_name_1">Nombre del Curso:</label>
+                <input type="text" id="course_name_1" name="courses[0][name]" required>
+                <br><br>
+                <label for="students_1">Estudiantes:</label>
+                <input type="text" name="courses[0][students][]" placeholder="Nombre del estudiante" required>
+                <br><br>
+                <button type="button" onclick="addStudent(0)">Agregar Estudiante</button>
+            </div>
+        </div>
+
+        <br><br>
+
+        <button type="submit">Crear Institución</button>
+    </form>
+
+    <script>
+        function addStudent(courseIndex) {
+            const studentInput = document.createElement('input');
+            studentInput.setAttribute('type', 'text');
+            studentInput.setAttribute('name', `courses[${courseIndex}][students][]`);
+            studentInput.setAttribute('placeholder', 'Nombre del estudiante');
+            document.querySelector(`#courses .course:nth-child(${courseIndex + 1})`).appendChild(studentInput);
+        }
+    </script>
+</body>
+</html>

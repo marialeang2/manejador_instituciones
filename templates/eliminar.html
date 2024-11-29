@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Institución</title>
+</head>
+<body>
+    <h1>Eliminar Institución</h1>
+
+    <form action="/delete_institucion/{{ institucion.title }}" method="POST">
+        <p>¿Estás seguro de que deseas eliminar la institución {{ institucion.title }}?</p>
+        <button type="submit">Eliminar</button>
+    </form>
+</body>
+</html>
