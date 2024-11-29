@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css">
+    <title>{{ institucion.title }}</title>
+</head>
+<body>
+    <header>
+        <h1>Detalles de la Institución: {{ institucion.title }}</h1>
+    </header>
+    <main>
+        <h2>Información General</h2>
+        <p><strong>Nombre:</strong> {{ institucion.title }}</p>
+        <p><strong>Descripción:</strong> {{ institucion.description }}</p>
+
+        <h3>Cursos Ofrecidos</h3>
+        {% if institucion.courses %}
+            <ul>
+                {% for curso in institucion.courses %}
+                    <li>
+                        <strong>{{ curso.name }}</strong>
+                        <ul>
+                            <li><strong>Estudiantes:</strong>
+                                <ul>
+                                    {% for estudiante in curso.students %}
+                                        <li>{{ estudiante }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay cursos disponibles para esta institución.</p>
+        {% endif %}
+
+        <br><br>
+        <button onclick="history.back()">Volver</button>
+    </main>
+</body>
+</html>

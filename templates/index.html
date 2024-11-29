@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/styles.css">
-    <title>Instituciones</title>
+    <title>Gestión de Instituciones</title>
 </head>
 <body>
     <header>
@@ -13,9 +13,59 @@
     <main>
         <h2>Bienvenido al sistema de instituciones</h2>
         <p>Seleccione una de las opciones para manejar la información:</p>
-        <button onclick="location.href='crear.html'">Crear Institución</button>
-        <button onclick="location.href='consultar.html'">Consultar Institución</button>
-        <button onclick="location.href='actualizar.html'">Actualizar Institución</button>
+
+        <!-- Campo de entrada para el nombre de la institución -->
+        <label for="institucion_name">Nombre de la Institución:</label>
+        <input type="text" id="institucion_name" name="institucion_name" placeholder="Ingresa el nombre de la institución">
+        <br><br>
+
+        <!-- Botones para consultar y actualizar -->
+        <button onclick="consultarInstitucion()">Consultar Institución</button>
+        <button onclick="actualizarInstitucion()">Actualizar Institución</button>
+        <button onclick="borrarInstitucion()">Borrar Institución</button>
+        <br><br>
+
+        <!-- Otros botones -->
+        <button onclick="location.href='/crear_institucion'">Crear Institución</button>
     </main>
+
+    <script>
+        function consultarInstitucion() {
+            // Obtiene el valor del campo de entrada
+            var institucionName = document.getElementById('institucion_name').value;
+
+            // Redirige a la ruta correspondiente con el nombre de la institución en la URL
+            if (institucionName) {
+                location.href = '/consultar_institucion/' + encodeURIComponent(institucionName);
+            } else {
+                alert("Por favor, ingresa el nombre de la institución.");
+            }
+        }
+
+        function actualizarInstitucion() {
+            // Obtiene el valor del campo de entrada
+            var institucionName = document.getElementById('institucion_name').value;
+
+            // Redirige a la ruta correspondiente con el nombre de la institución en la URL
+            if (institucionName) {
+                location.href = '/ver_institucion/' + encodeURIComponent(institucionName);
+            } else {
+                alert("Por favor, ingresa el nombre de la institución.");
+            }
+        }
+
+
+        function borrarInstitucion() {
+            // Obtiene el valor del campo de entrada
+            var institucionName = document.getElementById('institucion_name').value;
+
+            // Redirige a la ruta correspondiente con el nombre de la institución en la URL
+            if (institucionName) {
+                location.href = '/borrar_institucion/' + encodeURIComponent(institucionName);
+            } else {
+                alert("Por favor, ingresa el nombre de la institución.");
+            }
+        }
+    </script>
 </body>
 </html>

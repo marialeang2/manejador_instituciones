@@ -6,7 +6,7 @@ from db import collection
 
 views = Blueprint(__name__, 'views')
 
-@views.route('/home')
+@views.route('/')
 def home():
     return render_template('index.html')
 
@@ -57,7 +57,26 @@ def add_document():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-    
+
+@views.route('/consultar_institucion/<institucion_name>', methods=['GET'])
+def ver_institucion(institucion_name):
+    try:
+        # Buscar la institución por su nombre en la base de datos
+        institucion = collection.find_one({"title": institucion_name})
+
+        if not institucion:
+            return jsonify({"error": "Institución no encontrada"}), 404
+
+        # Convertir ObjectId a string si está presente
+        institucion['_id'] = str(institucion['_id'])
+
+        # Renderizar el template con los detalles de la institución
+        return render_template('ver_institucion.html', institucion=institucion)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @views.route('/ver_institucion/<title>', methods=['GET'])
 def update_institucion(title):
     # Recupera la institución desde MongoDB usando el id
@@ -110,7 +129,7 @@ def agregar_cursos(title):
         return jsonify({"error": str(e)}), 500
     
     
-@views.route('/delete_institucion/<title>', methods=['GET'])
+@views.route('/borrar_institucion/<title>', methods=['GET'])
 def borrar_institucion(title):
     institucion = collection.find_one({"title": title})
 
@@ -122,7 +141,7 @@ def borrar_institucion(title):
 
 
 
-@views.route('/delete_institucion/<title>', methods=['POST'])
+@views.route('/borrar_institucion/<title>', methods=['POST'])
 def delete_institucion(title):
     try:
         # Buscar la institución por nombre
@@ -139,19 +158,6 @@ def delete_institucion(title):
         return jsonify({"error": str(e)}), 500
     
 
-@views.route("/info", methods=["GET"])
-def get_info():
-    # Obtener el documento desde MongoDB
-    document = collection.find_one()
-
-    if not document:
-        return "Documento no encontrado", 404
-
-    # Convertir el documento a JSON usando bson.json_util.dumps
-    document_json = dumps(document)
-    document_parsed = json.loads(document_json)
-
-    return render_template("docs.html", document=document_parsed)
 
 
 @views.route("/documents", methods=["GET"])
