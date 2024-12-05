@@ -2,6 +2,6 @@ from pymongo import MongoClient
 
 # MongoDB connection
 #Esta configurada con ip externa de GCP, probablemente toque cambiarla xd
-client = MongoClient('mongodb://34.45.86.253:27017/')
-db = client["instituciones_db"]
+client = MongoClient('mongodb://104.197.114.21:27017/')
+db = client["instituciones-db-gcp"]
 collection = db["instituciones"]
